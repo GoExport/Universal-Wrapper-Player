@@ -33,104 +33,106 @@ function filterParams(params, filter) {
     });
 }
 
+// Get the parameters
+const params = getParams();
+
+// Flash parameters
+const defaultFlashParams = {
+    swf: "https://lightspeed.flashthemes.net/static/animation/aisd82ij/player.swf?v=2",
+};
+
+// Default flash variables
+const defaultFlashVars = {
+    "isPublished": 1,
+    "tlang": "en_US",
+    "is_private_shared": 0,
+    "autostart": 0,
+    "ctc": "go",
+    "ad": 0,
+    "appCode": "go",
+    "is_slideshow": 0,
+    "is_emessage": 0,
+    "movieLid": 0,
+    "isEmbed": 1,
+    "showButtons": 1,
+    "endStyle": 1,
+    "isWide": 1,
+    "pwm": 1,
+    "ut": -1,
+    "userId": null,
+    "username": "",
+    "uemail": "",
+    "numContact": "",
+    "playcount": 0,
+    "copyable": 0,
+    "refuser": "",
+    "utm_source": "",
+    "chain_mids": "",
+    "movieOwnerId": "%userid%",
+    "movieId": null,
+    "apiserver": "https://flashthemes.net/",
+    "storePath": "https://flashthemes.net/static/store/<store>?v=%userid%",
+    "clientThemePath": "https://lightspeed.flashthemes.net/static/ct/ad44370a650793d9/<client_theme>"
+};
+
+// Attribute parameters
+const defaultFlashAttributes = {
+    allowScriptAccess: "always",
+    allowFullScreen: "true",
+};
+
 // Merge user parameters with default parameters
-function mergeParams(defaultParams, userParams) {
-    return { ...defaultParams, ...userParams };
-}
+const mergedFlashAttributes = { ...defaultFlashAttributes, ...params };
+const mergedFlashParams = { ...defaultFlashParams, ...params };
+const mergedFlashVars = { ...defaultFlashVars, ...params };
 
-// Check for required and recommended parameters
-function checkParams(params, required, recommended) {
-    required.forEach((key) => {
-        if (!(key in params)) {
-            alert(`Missing required parameter: ${key}`);
-            throw new Error(`Missing required parameter: ${key}`);
-        }
-    });
+// Filters out each set of parameters from each other's object
+filterParams(mergedFlashAttributes, defaultFlashParams);
+filterParams(mergedFlashParams, defaultFlashAttributes);
+filterParams(mergedFlashVars, defaultFlashAttributes);
+filterParams(mergedFlashVars, defaultFlashParams);
 
-    recommended.forEach((key) => {
-        if (!(key in params)) {
-            console.warn(`Missing recommended parameter: ${key}`);
-        }
-    });
-}
+allParams = {
+    ...mergedFlashAttributes,
+    ...mergedFlashParams,
+    ...mergedFlashVars,
+};
 
-// Main function to get and process parameters
-function processParams() {
-    const params = getParams();
+// Required parameters
+const required = [
+    "movieId",
+    "userId"
+];
 
-    const defaultFlashParams = {
-        swf: "https://lightspeed.flashthemes.net/static/animation/aisd82ij/player.swf?v=2",
-    };
+// Recommended parameters
+const recommended = [
+    "userId"
+];
 
-    const defaultFlashVars = {
-        "isPublished": 1,
-        "tlang": "en_US",
-        "is_private_shared": 0,
-        "autostart": 0,
-        "ctc": "go",
-        "ad": 0,
-        "appCode": "go",
-        "is_slideshow": 0,
-        "is_emessage": 0,
-        "movieLid": 0,
-        "isEmbed": 1,
-        "showButtons": 1,
-        "endStyle": 1,
-        "isWide": 1,
-        "pwm": 1,
-        "ut": -1,
-        "userId": null,
-        "username": "",
-        "uemail": "",
-        "numContact": "",
-        "playcount": 0,
-        "copyable": 0,
-        "refuser": "",
-        "utm_source": "",
-        "chain_mids": "",
-        "movieOwnerId": "%userid%",
-        "movieId": null,
-        "apiserver": "https://flashthemes.net/",
-        "storePath": "https://flashthemes.net/static/store/<store>?v=%userid%",
-        "clientThemePath": "https://lightspeed.flashthemes.net/static/ct/ad44370a650793d9/<client_theme>"
-    };
+// Replacements
+const replacements = {
+    "%userid%": params.userId,
+    "%movieid%": params.movieId,
+};
 
-    const defaultFlashAttributes = {
-        allowScriptAccess: "always",
-        allowFullScreen: "true",
-    };
+// Check for existence of required parameters
+required.forEach((key) => {
+    if (!(key in params)) {
+        alert(`Missing required parameter: ${key}`);
+        throw new Error(`Missing required parameter: ${key}`);
+    }
+});
 
-    const mergedFlashAttributes = mergeParams(defaultFlashAttributes, params);
-    const mergedFlashParams = mergeParams(defaultFlashParams, params);
-    const mergedFlashVars = mergeParams(defaultFlashVars, params);
+// Check for existence of recommended parameters
+recommended.forEach((key) => {
+    if (!(key in params)) {
+        console.warn(`Missing recommended parameter: ${key}`);
+    }
+});
 
-    filterParams(mergedFlashAttributes, defaultFlashParams);
-    filterParams(mergedFlashParams, defaultFlashAttributes);
-    filterParams(mergedFlashVars, defaultFlashAttributes);
-    filterParams(mergedFlashVars, defaultFlashParams);
-
-    const allParams = {
-        ...mergedFlashAttributes,
-        ...mergedFlashParams,
-        ...mergedFlashVars,
-    };
-
-    const required = ["movieId", "userId"];
-    const recommended = ["userId"];
-
-    const replacements = {
-        "%userid%": params.userId,
-        "%movieid%": params.movieId,
-    };
-
-    checkParams(params, required, recommended);
-
-    return {
-        flashAttributes: replacePlaceholders(mergedFlashAttributes, replacements),
-        flashParams: replacePlaceholders(mergedFlashParams, replacements),
-        flashVars: replacePlaceholders(mergedFlashVars, replacements),
-    };
-}
-
-// Execute the main function
-const paramsObject = processParams();
+// Parameters object
+const paramsObject = {
+    flashAttributes: replacePlaceholders(mergedFlashAttributes, replacements),
+    flashParams: replacePlaceholders(mergedFlashParams, replacements),
+    flashVars: replacePlaceholders(mergedFlashVars, replacements),
+};

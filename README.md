@@ -8,4 +8,4 @@ Simply visit the github page [here](https://wrapperoffline.github.io/Universal-W
 If you want to contribute to this project, please fork this repository and make a pull request with your changes. We will review your changes and merge them if they are good.
 
 ## License
-This project is licensed under the MIT License. You can read the license [here](
+This project is licensed under the MIT License. You can read the license [here](https://github.com/GoExport/Universal-Wrapper-Player/blob/master/LICENSE)

@@ -87,7 +87,7 @@
 
             const movieId = document.getElementById('movieId').value;
             const userId = document.getElementById('userId').value;
-            const isVideoRecord = document.getElementById('isVideoRecord').checked;
+            const isVideoRecord = document.getElementById('isVideoRecord').checked ? 1 : 0;
 
             const params = new URLSearchParams({
                 movieId: movieId,

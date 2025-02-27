@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+    <title>Video Player - Wrapper: Offline</title>
+    <link rel="stylesheet" type="text/css" href="/pages/css/modern-normalize.css">
+    <link rel="stylesheet" type="text/css" href="/pages/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/pages/css/flash.css">
+    <script type="text/javascript">
+        function onMovieStart() {
+            console.log("Movie has started!");
+            // Add your logic here
+        }
+
+        function fscommand(command, args) {
+            if (command === "start") {
+                onMovieStart();
+            }
+        }
+    </script>
+</head>
+<body style="margin:0px">
+    <main>
+        <object id="obj" data="/animation/414827163ad4eb60/player.swf" type="application/x-shockwave-flash" width="100%" height="100%">
+            <param name="flashvars" value="autostart=1&amp;isWide=1&amp;ut=60&amp;apiserver=%2F&amp;storePath=%2Fstore%2F3a981f5cb2739137%2F%3Cstore%3E&amp;clientThemePath=%2Fstatic%2Fad44370a650793d9%2F%3Cclient_theme%3E&amp;movieId=9a1fb38&amp;isVideoRecord=1">
+            <param name="allowScriptAccess" value="always">
+            <param name="allowFullScreen" value="true">
+        </object>
+    </main>
+</body>
+</html>

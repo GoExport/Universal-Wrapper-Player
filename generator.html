@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Wrapper Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"], input[type="checkbox"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007BFF;
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Universal Wrapper Player</h1>
+    <form id="playerForm">
+        <label for="movieId">Movie ID:</label>
+        <input type="text" id="movieId" name="movieId" required><br><br>
+
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required><br><br>
+
+        <label for="isVideoRecord">Is Recording:</label>
+        <input type="checkbox" id="isVideoRecord" name="isVideoRecord"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('playerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const movieId = document.getElementById('movieId').value;
+            const userId = document.getElementById('userId').value;
+            const isVideoRecord = document.getElementById('isVideoRecord').checked;
+
+            const params = new URLSearchParams({
+                movieId: movieId,
+                userId: userId,
+                isVideoRecord: isVideoRecord
+            });
+
+            window.location.href = `index.html?${params.toString()}`;
+        });
+    </script>
+</body>
+</html>

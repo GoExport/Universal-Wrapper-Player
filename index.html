@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/modern-normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/css/flash.css">
+    <script src="/js/swfobject.js"></script>
+    <script src="/js/params.js"></script>
+    <script>
+        const startRecord = new Event('startRecord');
+        const stopRecord = new Event('stopRecord');
+        function flash_DoFSCommand(command, args) {
+            switch (command) {
+                case "start":
+                    {
+                        document.dispatchEvent(startRecord);
+                        console.log("start");
+                        break;
+                    }
+                case "stop":
+                    {
+                        document.dispatchEvent(stopRecord);
+                        console.log("stop");
+                        break;
+                    }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <div id="flash">
+            You require Flash Player and a legacy browser to view this content.
+        </div>
+    </main>
+    <script>
+        swfobject.embedSWF(paramsObject["flashParams"]['swf'], 'flash', '100%', '100%', '9.0.0', '', paramsObject["flashVars"], paramsObject["flashAttributes"])
+    </script>
+</body>
+
+</html>

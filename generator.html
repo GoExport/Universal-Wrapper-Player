@@ -5,98 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Wrapper Player</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        h1 {
-            color: #333;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        input[type="text"], input[type="checkbox"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            border: none;
-            border-radius: 3px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-        li {
-            background: #fff;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 3px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <script src="./js/config.js"></script>
 </head>
 <body>
     <h1>Universal Wrapper Player</h1>
     <form id="playerForm">
-        <label for="movieId">Movie ID:</label>
-        <input type="text" id="movieId" name="movieId" required><br><br>
+        <label for="environment">Environment:</label>
+        <select id="environment" name="environment" required></select><br><br>
 
-        <label for="userId">User ID:</label>
-        <input type="text" id="userId" name="userId" required><br><br>
-
-        <label for="isVideoRecord">Is Recording:</label>
-        <input type="checkbox" id="isVideoRecord" name="isVideoRecord"><br><br>
+        <div id="dynamicFields"></div>
 
         <button type="submit">Submit</button>
     </form>
 
     <script>
+        const environmentSelect = document.getElementById('environment');
+        const dynamicFields = document.getElementById('dynamicFields');
+
+        for (const key in environment) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+            environmentSelect.appendChild(option);
+        }
+
+        environmentSelect.addEventListener('change', function() {
+            const selectedEnvironment = environment[this.value];
+            dynamicFields.innerHTML = '';
+
+            for (const section in selectedEnvironment) {
+                for (const field in selectedEnvironment[section]) {
+                    const value = selectedEnvironment[section][field];
+                    const label = document.createElement('label');
+                    label.textContent = `${field}:`;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = field;
+                    input.value = typeof value === 'object' ? JSON.stringify(value) : value;
+                    dynamicFields.appendChild(label);
+                    dynamicFields.appendChild(input);
+                    dynamicFields.appendChild(document.createElement('br'));
+                }
+            }
+        });
+
         document.getElementById('playerForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const movieId = document.getElementById('movieId').value;
-            const userId = document.getElementById('userId').value;
-            const isVideoRecord = document.getElementById('isVideoRecord').checked ? 1 : 0;
+            const formData = new FormData(this);
+            const params = new URLSearchParams();
 
-            const params = new URLSearchParams({
-                movieId: movieId,
-                userId: userId,
-                isVideoRecord: isVideoRecord
-            });
+            for (const [key, value] of formData.entries()) {
+                params.append(key, value);
+            }
 
             window.location.href = `index.html?${params.toString()}`;
         });
+
+        // Trigger change event to populate fields for the default selected environment
+        environmentSelect.dispatchEvent(new Event('change'));
     </script>
 </body>
 </html>

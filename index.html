@@ -19,23 +19,17 @@
     <script src="./js/params.js"></script>
     <script src="./js/loader.js"></script>
     <script>
-        var startRecord = 0;
-        var stopRecord = 0;
-
+        // Function that receives commands from Flash
         function flash_DoFSCommand(command, args) {
             switch (command) {
                 case "start":
-                    {
-                        startRecord = Date.now();
-                        console.log(startRecord);
-                        break;
-                    }
+                    startRecord = Math.floor(performance.now());  // Convert to milliseconds (rounding down)
+                    console.log('Recording started at: ' + startRecord);
+                    break;
                 case "stop":
-                    {
-                        stopRecord = Date.now();
-                        console.log(stopRecord);
-                        break;
-                    }
+                    stopRecord = Math.floor(performance.now());  // Convert to milliseconds (rounding down)
+                    console.log('Recording stopped at: ' + stopRecord);
+                    break;
             }
         }
     </script>

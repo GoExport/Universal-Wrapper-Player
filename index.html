@@ -18,7 +18,7 @@
     <script src="./js/config.js"></script>
     <script src="./js/params.js"></script>
     <script src="./js/loader.js"></script>
-    <!-- <script>
+    <script>
         var startRecord = 0;
         var stopRecord = 0;
 
@@ -26,19 +26,19 @@
             switch (command) {
                 case "start":
                     {
-                        startRecord = Date.now();
+                        startRecord = performance.now();
                         console.log(startRecord);
                         break;
                     }
                 case "stop":
                     {
-                        stopRecord = Date.now();
+                        stopRecord = performance.now();
                         console.log(stopRecord);
                         break;
                     }
             }
         }
-    </script> -->
+    </script>
 </head>
 
 <body>

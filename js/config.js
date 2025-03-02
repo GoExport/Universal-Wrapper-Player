@@ -20,6 +20,7 @@ const environment = {
             'clientThemePath': 'http://localhost:4343/static/ad44370a650793d9/<client_theme>',
             'movieId': null,
             'isVideoRecord': 0,
+            'isSpeedy': 0,
         },
         params: {
             'allowFullScreen': 'true',
@@ -37,6 +38,7 @@ const environment = {
             'isVideoRecord': 0,
             'playerWidth': 1280,
             'playerHeight': 720,
+            'isSpeedy': 0,
             'ut': '-1',
             'apiserver': 'https://flashthemes.net/',
             'autostart': 1,

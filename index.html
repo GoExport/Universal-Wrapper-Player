@@ -22,10 +22,10 @@
         function flash_DoFSCommand(command, args) {
             switch (command) {
                 case "start":
-                    startRecord = Date.now();
+                    startRecord = window.performance.timing.navigationStart + window.performance.now();
                     break;
                 case "stop":
-                    stopRecord = Date.now();
+                    stopRecord = window.performance.timing.navigationStart + window.performance.now();
                     break;
             }
         }

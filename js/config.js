@@ -70,10 +70,11 @@ const environment = {
       isEmbed: 1,
       playerWidth: 1280,
       playerHeight: 720,
-      apiserver: "http://localhost:4343/",
-      storePath: "http://localhost:4343/store/3a981f5cb2739137/<store>",
+      apiserver: "http://wrapperonlinediamond.waterdroprio.pp.ua/",
+      storePath:
+        "http://wrapperonlinediamond.waterdroprio.pp.ua/store/3a981f5cb2739137/<store>",
       clientThemePath:
-        "http://localhost:4343/static/ad44370a650793d9/<client_theme>",
+        "http://wrapperonlinediamond.waterdroprio.pp.ua/static/ad44370a650793d9/<client_theme>",
       movieId: null,
       isVideoRecord: 0,
       isSpeedy: 0,

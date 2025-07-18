@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="./css/modern-normalize.css">
-    <link rel="stylesheet" type="text/css" href="./css/global.css">
-    <link rel="stylesheet" type="text/css" href="./css/flash.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="./css/modern-normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./css/global.css" />
+    <link rel="stylesheet" type="text/css" href="./css/flash.css" />
     <script>
-        // Controls if this page should receive warnings on validation failure
-        const shouldWarn = false;
+      // Controls if this page should receive warnings on validation failure
+      const shouldWarn = false;
     </script>
     <script src="./js/helpers.js"></script>
     <script src="./js/swfobject.js"></script>
@@ -19,33 +18,40 @@
     <script src="./js/params.js"></script>
     <script src="./js/loader.js"></script>
     <script>
-        function flash_DoFSCommand(command, args) {
-            switch (command) {
-                case "start":
-                    startRecord = Date.now();
-                    break;
-                case "stop":
-                    stopRecord = Date.now();
-                    break;
-            }
+      function flash_DoFSCommand(command, args) {
+        switch (command) {
+          case "start":
+            startRecord = Date.now();
+            console.log("Video started " + startRecord);
+            break;
+          case "stop":
+            stopRecord = Date.now();
+            console.log("Video stopped " + stopRecord);
+            break;
         }
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <div id="flash">
-            You require Flash Player and a legacy browser to view this content.
-        </div>
+      <div id="flash">
+        You require Flash Player and a legacy browser to view this content.
+      </div>
     </main>
     <script>
-        const paramsObject = loadParameters();
-        swfobject.embedSWF(paramsObject.flashSpecial['swf'], 'flash', '100%', '100%', '9.0.0', '',
-            paramsObject.flashVars,
-            paramsObject.flashParams,
-            paramsObject.flashAttributes
-        )
+      const paramsObject = loadParameters();
+      swfobject.embedSWF(
+        paramsObject.flashSpecial["swf"],
+        "flash",
+        "100%",
+        "100%",
+        "9.0.0",
+        "",
+        paramsObject.flashVars,
+        paramsObject.flashParams,
+        paramsObject.flashAttributes
+      );
     </script>
-</body>
-
+  </body>
 </html>

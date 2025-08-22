@@ -23,6 +23,8 @@
           case "start":
             startRecord = Date.now();
             console.log("Video started " + startRecord);
+            document.getElementById("flash").pause();
+            document.getElementById("flash").seek(0);
             break;
           case "stop":
             stopRecord = Date.now();

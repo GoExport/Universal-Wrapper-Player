@@ -18,13 +18,13 @@
     <script src="./js/params.js"></script>
     <script src="./js/loader.js"></script>
     <script>
-      function flash_DoFSCommand(command, args) {
+      function obj_DoFSCommand(command, args) {
         switch (command) {
           case "start":
             startRecord = Date.now();
             console.log("Video started " + startRecord);
-            document.getElementById("flash").pause();
-            document.getElementById("flash").seek(0);
+            document.getElementById("obj").pause();
+            document.getElementById("obj").seek(0);
             break;
           case "stop":
             stopRecord = Date.now();
@@ -37,15 +37,51 @@
 
   <body>
     <main>
-      <div id="flash">
-        You require Flash Player and a legacy browser to view this content.
+      <div id="obj">
+        <div
+          class="flash-error"
+          style="
+            padding: 2em;
+            text-align: center;
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            color: #856404;
+          "
+        >
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            style="vertical-align: middle; margin-bottom: 8px"
+          >
+            <circle cx="12" cy="12" r="10" fill="#ffeeba" />
+            <path
+              d="M12 8v4m0 4h.01"
+              stroke="#856404"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div
+            style="font-size: 1.2em; font-weight: bold; margin-bottom: 0.5em"
+          >
+            Flash Player Required
+          </div>
+          <div>
+            You need Adobe Flash Player and a legacy browser to view this
+            content.<br />
+            Please use Internet Explorer or an older browser with Flash enabled.
+          </div>
+        </div>
       </div>
     </main>
     <script>
       const paramsObject = loadParameters();
       swfobject.embedSWF(
         paramsObject.flashSpecial["swf"],
-        "flash",
+        "obj",
         "100%",
         "100%",
         "9.0.0",
